@@ -1,6 +1,10 @@
 ARG IMAGE_EXT
 
 ARG REGISTRY=ghcr.io/epics-containers
+# Built on the plain epics-base developer image (7.0.10ec2): the template's
+# iocStats, pvlogging and autosave, plus asyn and modbus from ibek-support
+# pinned at 8545fa2 (the commit ioc-timing and ioc-motion build with), all
+# upstream recipes. No vendor code.
 ARG RUNTIME=${REGISTRY}/epics-base${IMAGE_EXT}-runtime:7.0.10ec2
 ARG DEVELOPER=${REGISTRY}/epics-base${IMAGE_EXT}-developer:7.0.10ec2
 
@@ -30,6 +34,14 @@ RUN ansible.sh pvlogging
 
 COPY ibek-support/autosave/ autosave
 RUN ansible.sh autosave
+
+COPY ibek-support/asyn/ asyn
+RUN ansible.sh asyn
+
+# epics-modules/modbus R3-4 (drvModbusAsyn, APS), upstream's recipe unchanged:
+# what it sends at start is in README "What the driver sends at start".
+COPY ibek-support/modbus/ modbus
+RUN ansible.sh modbus
 
 # get the ioc source and build it
 COPY ioc ${SOURCE_FOLDER}/ioc
