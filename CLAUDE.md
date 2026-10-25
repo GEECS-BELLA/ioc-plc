@@ -13,8 +13,10 @@ unchanged. What the driver sends at start, and why a start is read-only:
   not from this image.
 - **Why ours.** No epics-containers runtime image carries modbus (checked
   2026-10-24). No patch: a write port with a non-zero poll delay reads its
-  block once at creation and the output records start from that read, so a
-  start sends reads only (proven on the fake and twice on the PLC).
+  block once at creation and the output records start from that read, so an
+  instance whose output records have no `PINI` and no autosave starts with
+  reads only (README; proven on the fake and twice on the PLC, geecs-epics
+  #16's phase-A slice record).
 - **Build.** On the IOC host: `docker build --target runtime -t ioc-plc:local ~/ioc-plc`.
   On a workstation: `DOCKER_DEFAULT_PLATFORM=linux/amd64 TARGET=runtime
   TAG=ioc-plc:local ./build` (the variable is required on Apple silicon; the
