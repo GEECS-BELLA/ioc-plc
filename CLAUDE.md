@@ -17,9 +17,9 @@ unchanged. What the driver sends at start, and why a start is read-only:
   reads only (README; proven on the fake and twice on the PLC, geecs-epics
   #16's phase-A slice record).
 - **Images.** CI publishes on a git tag, CalVer `YYYY.M.N` (`2026.10.1`;
-  never re-push a tag): `ghcr.io/geecs-bella/ioc-plc-runtime:<tag>` (public;
-  what hosts pull, no credentials) and `-developer` (the release job runs in
-  it; a build base). Hosts never build. Bench work from a branch: a
+  never re-push a tag): `ghcr.io/geecs-bella/ioc-plc-runtime:<tag>` (what hosts
+  pull, no credentials) and `-developer` (the release job runs in it; a build
+  base); both packages made public once, after the first tag creates them. Hosts never build. Bench work from a branch: a
   pre-release tag (`2026.10.2b1`). A local build for development:
   `DOCKER_DEFAULT_PLATFORM=linux/amd64 TARGET=runtime TAG=ioc-plc:local ./build`
   (the variable is required on Apple silicon; the image is amd64, emulated).
