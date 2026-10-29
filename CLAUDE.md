@@ -7,9 +7,9 @@ unchanged. What the driver sends at start, and why a start is read-only:
 `README.md`.
 
 - **Instances** live in GEECS-BELLA/geecs-epics, not here: `plctest1`
-  (Productivity1000 `U_PLC`, profile `bench-plc`) and its fake twin `plctest1-sim` (`hosts/sim`, profile
-  `plc`). Records come from the instance's own templates and substitutions,
-  not from this image.
+  (Productivity1000 `U_PLC`, profile `bench-plc`) and its fake twin
+  `plctest1-sim` (`hosts/sim`, profile `plc`). Records come from the
+  instance's own templates and substitutions, not from this image.
 - **Why ours.** No epics-containers runtime image carries modbus (checked
   2026-10-24). No patch: a write port with a non-zero poll delay reads its
   block once at creation and the output records start from that read, so an
